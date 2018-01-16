@@ -30,7 +30,7 @@
 ;;; Code:
 ;;;; This is to download the packages, NOT to install them.
 (defconst thule-packages
-  '( auctex )
+  '( auctex intero)
   "The list of Lisp packages required by the thule layer.
 
 Each entry is either:
@@ -58,11 +58,14 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+;;   ;; https://github.com/haskell/haskell-mode/issues/1553
+;;   ;; https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md
+
 ;; This init function causes auctex to be installed.
 (defun thule/init-auctex ()
   ;;The reason for this weird thing is, that auctex overrides the tex package.
   ;;http://cachestocaches.com/2015/8/getting-started-use-package/
-  (use-package tex
+  (use-package tex 
     ;;:ensure auctex ;This is not necessary, as auctex will have been downloaded and installed.
     :config
 
@@ -124,5 +127,8 @@ Each entry is either:
     (add-hook 'LaTeX-mode-hook
               '(lambda ()
                  (reftex-mode))))
+  )
+(defun thule/post-init-intero()
+  (add-hook 'haskell-mode-hook 'intero-mode)
   )
 ;;; packages.el ends here
