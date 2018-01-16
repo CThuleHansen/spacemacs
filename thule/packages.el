@@ -30,7 +30,8 @@
 ;;; Code:
 ;;;; This is to download the packages, NOT to install them.
 (defconst thule-packages
-  '( auctex intero)
+  '( auctex ;; intero
+            )
   "The list of Lisp packages required by the thule layer.
 
 Each entry is either:
@@ -129,6 +130,7 @@ Each entry is either:
                  (reftex-mode))))
   )
 (defun thule/post-init-intero()
-  (add-hook 'haskell-mode-hook 'intero-mode)
+  ;; (add-hook 'haskell-mode-hook 'intero-mode)
+  ;; (add-hook 'haskell-mode-hook 'hindent-mode)
   )
 ;;; packages.el ends here
