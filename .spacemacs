@@ -30,7 +30,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     markdown
+     html
+     (markdown :variables markdown-live-preview-engine 'vmd)
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -48,7 +49,8 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
+     (spell-checking :variables enable-flyspell-auto-completion t)
+     octave
      ;; syntax-checking
      ;; version-control
      )
@@ -355,70 +357,7 @@ yo place your code here."
                                   ))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (use-package tex                                                                   ;;
-;;   :ensure auctex                                                                   ;;
-;;   :config                                                                          ;;
-;;                                                                                    ;;
-;;   ;; Indent items by two spaces.                                                   ;;
-;;   (setq LaTeX-item-indent 0)                                                       ;;
-;;   (setq TeX-PDF-mode t)                                                            ;;
-;;   (setq-default TeX-master nil) ; Query for master file.                           ;;
-;;                                                                                    ;;
-;;   ;; Generate sync file and sync with C-v                                          ;;
-;;   (eval-after-load                                                                 ;;
-;;       "tex" '(add-to-list 'TeX-command-list                                        ;;
-;;                           '("latexmk" "latexmk -pdf %t --synctex=1" TeX-run-TeX))) ;;
-;;                                                                                    ;;
-;;   (setq latex-run-command "pdflatex")                                              ;;
-;;   (setq LaTeX-command "latex --synctex=1")                                         ;;
-;;                                                                                    ;;
-;;   ;; Use pdf-tools to open PDF files                                               ;;
-;;   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))                     ;;
-;;         TeX-source-correlate-start-server t                                        ;;
-;;         TeX-source-correlate-method 'synctex)                                      ;;
-;;                                                                                    ;;
-;;   (setq TeX-auto-save t                                                            ;;
-;;         TeX-parse-self t)                                                          ;;
-;;                                                                                    ;;
-;;   ;; Needed to sync TeX and PDF                                                    ;;
-;;   (add-hook 'LaTeX-mode-hook                                                       ;;
-;;             '(lambda ()                                                            ;;
-;;                (TeX-source-correlate-mode 1)))                                     ;;
-;;                                                                                    ;;
-;;   (add-hook 'TeX-after-compilation-finished-functions                              ;;
-;;             #'TeX-revert-document-buffer)                                          ;;
-;;                                                                                    ;;
-;;   ;; (add-hook 'pdf-view-mode-hook 'auto-revert-mode)                              ;;
-;;   ;; (setq auto-revert-interval 0.5)                                               ;;
-;;                                                                                    ;;
-;;   (add-hook 'pdf-view-mode-hook                                                    ;;
-;;             (lambda ()                                                             ;;
-;;               (pdf-view-fit-page-to-window) ))                                     ;;
-;;                                                                                    ;;
-;;   ;; LateX keywords that need colouring                                            ;;
-;;   (setq font-latex-match-reference-keywords                                        ;;
-;;         '(                                                                         ;;
-;;           ("ac" "[{")                                                              ;;
-;;           ("todo" "[{")                                                            ;;
-;;           ("kw" "[{")                                                              ;;
-;;           ("vsl" "[{")                                                             ;;
-;;           ("vpp" "[{")                                                             ;;
-;;           ("vrt" "[{")                                                             ;;
-;;           ("acp" "[{")                                                             ;;
-;;           ("contribution" "[{")                                                    ;;
-;;           ("acrodef" "[{")                                                         ;;
-;;           ("crefName" "[{")                                                        ;;
-;;           ("cref" "[{")                                                            ;;
-;;           ("Cref" "[{")                                                            ;;
-;;           ("cnref" "[{")                                                           ;;
-;;           ("vdmkw" "[{")                                                           ;;
-;;           ))                                                                       ;;
-;;                                                                                    ;;
-;;   (add-hook 'LaTeX-mode-hook                                                       ;;
-;;             '(lambda ()                                                            ;;
-;;                (reftex-mode))))                                                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;(add-hook 'reftex-toc-mode-hook 'spacemacs/toggle-maximize-buffer)
 
 (add-hook 'bibtex-mode-hook (lambda ()
                               (electric-indent-mode -1)))
@@ -448,9 +387,10 @@ yo place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ispell-dictionary "en_GB-ise")
  '(package-selected-packages
    (quote
-    (mmm-mode markdown-toc markdown-mode gh-md yaml-mode intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc haskell-mode company-cabal cmm-mode pdf-tools tablist helm-company helm-c-yasnippet fuzzy flyspell-correct-helm flyspell-correct company-statistics company auto-yasnippet yasnippet auto-dictionary auctex ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (flyspell-popup vmd-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data mmm-mode markdown-toc markdown-mode gh-md yaml-mode intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets company-ghci company-ghc ghc haskell-mode company-cabal cmm-mode pdf-tools tablist helm-company helm-c-yasnippet fuzzy flyspell-correct-helm flyspell-correct company-statistics company auto-yasnippet yasnippet auto-dictionary auctex ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
