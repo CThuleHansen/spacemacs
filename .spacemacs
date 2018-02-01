@@ -49,7 +49,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     (spell-checking :variables enable-flyspell-auto-completion t)
+     (spell-checking :variables enable-flyspell-auto-completion t spell-checking-enable-by-default nil)
      octave
      ;; syntax-checking
      ;; version-control

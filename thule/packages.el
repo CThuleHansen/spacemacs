@@ -128,6 +128,7 @@ Each entry is either:
     (add-hook 'LaTeX-mode-hook
               '(lambda ()
                  (reftex-mode))))
+    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   )
 (defun thule/post-init-intero()
   ;; (add-hook 'haskell-mode-hook 'intero-mode)
