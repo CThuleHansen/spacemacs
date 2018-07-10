@@ -400,7 +400,6 @@ yo place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
- '(haskell-stylish-on-save t)
  '(ispell-dictionary "en_GB-ise")
  '(package-selected-packages
    (quote
