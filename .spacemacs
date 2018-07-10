@@ -55,7 +55,7 @@ values."
      ;;        shell-default-position 'bottom)
      (spell-checking
       :variables
-      enable-flyspell-auto-completion t
+      enable-flyspell-auto-completion nil
       spell-checking-enable-by-default nil)
      octave
      ;; syntax-checking
@@ -330,22 +330,6 @@ yo place your code here."
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   (add-hook 'org-mode-hook 'flyspell-mode)
 
- "https://github.com/haskell/haskell-mode/issues/1553"
- (with-eval-after-load 'haskell-mode
-     (setq haskell-process-args-ghci
-                   '("-ferror-spans" "-fshow-loaded-modules"))
-     (setq haskell-process-args-cabal-repl
-                   '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
-     (setq haskell-process-args-stack-ghci
-                   '("--ghci-options=-ferror-spans -fshow-loaded-modules"
-                                "--no-build" "--no-load"))
-     (setq haskell-process-args-cabal-new-repl
-                    '("--ghc-options=-ferror-spans -fshow-loaded-modules")))
-
-
- ;; VIM tab support
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-
   ;; delete without register
   (evil-define-operator evil-delete-without-register (beg end type yank-handler)
     (interactive "<R><y>")
@@ -416,7 +400,7 @@ yo place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
- '(haskell-process-log t)
+ '(haskell-stylish-on-save t)
  '(ispell-dictionary "en_GB-ise")
  '(package-selected-packages
    (quote
