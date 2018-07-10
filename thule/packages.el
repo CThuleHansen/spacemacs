@@ -30,7 +30,7 @@
 ;;; Code:
 ;;;; This is to download the packages, NOT to install them.
 (defconst thule-packages
-  '(auctex)
+  '(auctex dante)
   "The list of Lisp packages required by the thule layer.
 
 Each entry is either:
@@ -127,7 +127,19 @@ Each entry is either:
     (add-hook 'LaTeX-mode-hook
               '(lambda ()
                  (reftex-mode))))
-    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-    )
-
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  )
+(defun thule/init-dante ()
+  (use-package dante
+    :ensure t
+    :after haskell-mode
+    :commands 'dante-mode
+    :init
+    (add-hook 'haskell-mode-hook 'dante-mode)
+    (add-hook 'haskell-mode-hook 'flycheck-mode)
+    (add-hook 'dante-mode-hook
+              '(lambda () (flycheck-add-next-checker 'haskell-dante
+                                                     '(warning . haskell-hlint))))
+    (message "Dante added"))
+  )
 ;;; packages.el ends here
